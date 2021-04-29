@@ -1,0 +1,51 @@
+# ===================================================================
+# Spring Boot configuration for the "prod" profile.
+#
+# This configuration overrides the application.yml file.
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+logging:
+  level:
+    ROOT: INFO
+    org.hibernate.SQL: INFO
+    com.nab.userservice: INFO
+server:
+  port: 8081
+spring:
+  devtools:
+    restart:
+      enabled: false
+    livereload:
+      enabled: false
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/UserMicroservice?createDatabaseIfNotExist=true
+    username: root
+    password: root
+# ===================================================================
+# Application properties.
+# Note : 
+# Token Expired Time in mins
+# ===================================================================
+authorization:
+  token:
+    header: 
+      name: Authorization
+      prefix: Bearer 
+    secret: tokenSecretKeyValue
+    expiredtime: 300
+# ===================================================================
+# RabbitMQ properties.
+# ===================================================================
+spring:
+  rabbitmq:
+    host: localhost
+    port: 15672
+    username: guest
+    password: guest

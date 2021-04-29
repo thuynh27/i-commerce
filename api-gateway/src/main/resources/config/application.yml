@@ -1,0 +1,79 @@
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://test:test@localhost:8010/eureka
+spring:
+  application:
+    name: api-gateway
+  profiles:
+    active: dev
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: deferred
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate.jdbc.time_zone: UTC
+      hibernate.id.new_generator_mappings: true
+      hibernate.connection.provider_disables_autocommit: false
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: false
+      # modify batch size as necessary
+      hibernate.jdbc.batch_size: 25
+      hibernate.order_inserts: true
+      hibernate.order_updates: true
+      hibernate.query.fail_on_pagination_over_collection_fetch: true
+      hibernate.query.in_clause_parameter_padding: true
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+  security:
+    oauth2:
+      client:
+        registration:
+          facebook:
+            client-id: 1153662335081877
+            client-secret: 59a2e7f66fab2b3f35f869e182fbf203
+            scope:
+            - email
+            - public_profile
+        provider:
+            facebook:
+              authorizationUri: https://www.facebook.com/v3.0/dialog/oauth
+              tokenUri: https://graph.facebook.com/v3.0/oauth/access_token
+              userInfoUri: https://graph.facebook.com/v3.0/me?fields=id,first_name,middle_name,last_name,name,email,verified,is_verified,picture.width(250).height(250)
+
+server:
+  servlet:
+    session:
+      cookie:
+        http-only: true
+zuul:
+  host:
+    socket-timeout-millis: 60000
+    connect-timeout-millis: 60000 #important
+# Override sensitive headers to keep Authorization in header response 
+  sensitiveHeaders: Cookie,Set-Cookie
+ribbon:
+  eureka:
+    enabled: true  #important
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000 #important

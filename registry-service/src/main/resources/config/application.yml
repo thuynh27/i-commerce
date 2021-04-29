@@ -1,0 +1,33 @@
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+eureka:
+  client:
+    fetchRegistry: false
+    registerWithEureka: false
+    serviceUrl:
+      defaultZone: http://localhost:8010/eureka
+spring:
+  application:
+    name: discoveryservice
+  profiles:
+    active: dev
+server:
+  servlet:
+    session:
+      cookie:
+        http-only: true
+zuul:
+    host:
+        connect-timeout-millis: 5000
+        socket-timeout-millis: 10000
+
+hystrix:
+    command:
+        default:
+            execution:
+                isolation:
+                    thread:
+                        timeoutInMilliseconds: 10000
