@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import com.nab.product.model.ErrorMessage;
+import com.nab.product.producer.ProductSender;
 import com.nab.product.service.ErrorMessageService;
 
 @Aspect
@@ -21,10 +22,13 @@ public class TrackingProductAOP {
 	private static final Logger LOGGER = LoggerFactory.getLogger(TrackingProductAOP.class);
 
 	private ErrorMessageService errorMessageService;
+	
+	private ProductSender productSender;
 
 	@Autowired
-	public TrackingProductAOP(ErrorMessageService errorMessageService) {
+	public TrackingProductAOP(ErrorMessageService errorMessageService ,ProductSender productSender) {
 		this.errorMessageService = errorMessageService;
+		this.productSender = productSender;
 	}
 
 	@Before("execution(* com.nab.product.controller.ProductController.getProduct(..))")
@@ -34,6 +38,7 @@ public class TrackingProductAOP {
 			Object[] args = joinPoint.getArgs();
 			Long productId = (Long) args[0];
 			LOGGER.info("Tracking Viewing Product Service : {}", productId);
+			productSender.sendMessageToQueue(productId.toString());
 		} catch (Exception e) {
 			errorTracking(joinPoint, e);
 		}

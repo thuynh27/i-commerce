@@ -28,6 +28,20 @@ spring:
     username: root
     password: root
 # ===================================================================
+# RabbitMQ properties.
+# ===================================================================
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+queue:
+  tracking:
+    name: productQueue
+exchange:
+  product-exchange:
+    name: product.topic
+# ===================================================================
 # Application properties.
 # Note : 
 # Token Expired Time in mins

@@ -1,5 +1,5 @@
 # ===================================================================
-# Spring Boot configuration for the "prod" profile.
+# Spring Boot configuration for the "dev" profile.
 #
 # This configuration overrides the application.yml file.
 # ===================================================================
@@ -9,35 +9,30 @@
 # Full reference is available at:
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
-
 logging:
   level:
     ROOT: INFO
-    org.hibernate.SQL: INFO
-    com.nab.userservice: INFO
+    org.hibernate.SQL: DEBUG
+    com.nab.productservice: DEBUG
 server:
-  port: 8082
+  port: 8083
 spring:
   devtools:
     restart:
-      enabled: false
+      enabled: true
     livereload:
-      enabled: false
-  datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://localhost:3306/ProductService?createDatabaseIfNotExist=true
-    username: root
-    password: root
+      enabled: true
+  data:
+    mongodb:
+      #uri: mongodb://admin:admin@localhost:27017
+      uri: mongodb://localhost:27017
+      database: ProductTrackingService
 # ===================================================================
 # RabbitMQ properties.
 # ===================================================================
   rabbitmq:
-    listener:
-      simple:
-        concurrency: 4
-        max-concurrency: 8
     host: localhost
-    port: 15672
+    port: 5672
     username: guest
     password: guest
 queue:
