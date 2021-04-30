@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import com.nab.product.dto.ProductTracking;
+import com.nab.product.dto.ProductView;
 import com.nab.product.model.ErrorMessage;
 import com.nab.product.producer.ProductSender;
 import com.nab.product.service.ErrorMessageService;
@@ -45,6 +46,7 @@ public class TrackingProductAOP {
 			productSender.sendMessageToQueue(productTracking);
 			LOGGER.info("================ Tracking Viewing Product Service Successfully ========================");
 		} catch (Exception e) {
+			LOGGER.error(e.getLocalizedMessage());
 			errorTracking(joinPoint, e);
 		}
 	}
@@ -54,20 +56,21 @@ public class TrackingProductAOP {
 	public void searchProductAspect(JoinPoint joinPoint) {
 		try {
 			LOGGER.info("================ Tracking Search Product Service ========================");
-			Object[] args = joinPoint.getArgs();
-			Long productId = (Long) args[0];
-			ProductTracking productTracking = populateProductTracking(productId);
+			ProductTracking productTracking = populateProductTracking(null);
 			populateProductView(productTracking, joinPoint);
 			productSender.sendMessageToQueue(productTracking);
 			LOGGER.info("================ Tracking Search Product Service Scuccessfully ========================");
 		} catch (Exception e) {
+			LOGGER.error(e.getLocalizedMessage());
 			errorTracking(joinPoint, e);
 		}
 	}
 
 	private ProductTracking populateProductTracking(Long productId) {
 		ProductTracking productTracking = new ProductTracking();
-		productTracking.setProductID(productId);
+		if(productId != null) {
+			productTracking.setProductID(productId);
+		}
 		Optional<String> userName = SecurityUtils.getCurrentUserLogin();
 		if (userName.isPresent()) {
 			productTracking.setUserEmail(userName.get());
@@ -76,7 +79,13 @@ public class TrackingProductAOP {
 	}
 
 	private void populateProductView(ProductTracking productTracking, JoinPoint joinPoint) {
-		//TODO Tracking Search , Filter , Sort 
+		ProductView productView = new ProductView();
+		Object[] args = joinPoint.getArgs();
+		String keyword = (String) args[0];
+		productView.setActivity(joinPoint.getSignature().getName());
+		productView.setDescription(keyword);
+		productView.setParams(Arrays.toString(args));
+		productTracking.setProductView(productView);
 	}
 
 	private void errorTracking(JoinPoint joinPoint, Exception e) {

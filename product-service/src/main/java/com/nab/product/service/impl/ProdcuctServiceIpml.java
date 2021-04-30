@@ -99,6 +99,6 @@ public class ProdcuctServiceIpml implements ProductService {
 
 	@Override
 	public Page<ProductDTO> searchProducts(Pageable pageable, String keyword) {
-		return productRepository.findAll(pageable).map(ProductConverter.getInstance()::convertFromEntity);
+		return productRepository.findProductByKeyword(keyword, pageable).map(ProductConverter.getInstance()::convertFromEntity);
 	}
 }

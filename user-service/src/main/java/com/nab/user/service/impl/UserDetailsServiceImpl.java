@@ -61,8 +61,8 @@ public class UserDetailsServiceImpl implements UserDetailsService, UserSerivce {
 		UserAuthority user = userRepository.findByEmail(email).orElse(null);
 		 List<GrantedAuthority> authorities = Collections.
 	                singletonList(new SimpleGrantedAuthority(Role.ROLE_ADMIN.name()));
-		if (user != null) {
-			return new User(user.getEmail(),user.getEmail(),authorities);
+		if (user != null && user.getEmail() != null) {
+			return new User(user.getEmail(),user.getPassword() != null ? user.getPassword() : user.getName(),authorities);
 		}
 		return null;
 	}
@@ -113,13 +113,13 @@ public class UserDetailsServiceImpl implements UserDetailsService, UserSerivce {
 	@Transactional
 	public String authenticationOauth2User(UserDTO userDTO) {
 		UserAuthority user = userRepository.findByEmail(userDTO.getEmail()).orElse(null);
-		if (Objects.isNull(user)) {
+		if (Objects.nonNull(user) && Objects.isNull(user.getEmail())) {
 			user = UserConverter.getInstance().convertFromDto(userDTO);
 			userRepository.save(user);
 		}
 		 List<GrantedAuthority> authorities = Collections.
 	                singletonList(new SimpleGrantedAuthority(Role.ROLE_USER.name()));
-		User userSercurity =  new User(user.getEmail(),user.getEmail(),authorities);
+		User userSercurity =  new User(user.getEmail(),user.getPassword() != null ? user.getPassword() : user.getName(),authorities);
 		return  jwtTokenUtil.generateToken(userSercurity);
 	}
 
