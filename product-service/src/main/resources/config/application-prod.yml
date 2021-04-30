@@ -43,6 +43,8 @@ spring:
 queue:
   tracking:
     name: productQueue
+  dead:
+    name: deadQueue
 exchange:
   product-exchange:
     name: product.topic

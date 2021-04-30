@@ -20,10 +20,22 @@ public class RabbitConfiguration  {
     @Value("${exchange.product-exchange.name}")
     private String productExchange;
     
+    /* Handling Message error */
+    @Value("${queue.dead.name}")
+    private String deadQueue;
+    
     @Bean
     Queue ordersQueue() {
-
-        return QueueBuilder.durable(queueName).build();
+        return QueueBuilder.durable(queueName)
+                .withArgument("x-dead-letter-exchange", "")
+                .withArgument("x-dead-letter-routing-key", deadQueue)
+                .withArgument("x-message-ttl", 5000)
+        		.build();
+    }
+    
+    @Bean
+    Queue deadLetterQueue() {
+        return QueueBuilder.durable(deadQueue).build();
     }
     
     @Bean

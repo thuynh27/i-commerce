@@ -9,7 +9,7 @@ eureka:
       defaultZone: http://test:test@localhost:8010/eureka
 spring:
   application:
-    name: products-ws
+    name: tracking-ws
   profiles:
     active: dev
   data:

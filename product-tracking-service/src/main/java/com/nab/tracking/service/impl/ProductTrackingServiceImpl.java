@@ -1,5 +1,7 @@
 package com.nab.tracking.service.impl;
 
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +27,10 @@ public class ProductTrackingServiceImpl implements ProductTrackingService {
 
 	@Override
 	public ProductTracking saveProductTracking(ProductTracking productTracking) {
-		ProductView productView = productViewRepository.save(productTracking.getProductView());
-		productTracking.setProductView(productView);
+		if(Objects.nonNull(productTracking.getProductView())){
+			ProductView productView = productViewRepository.save(productTracking.getProductView());
+			productTracking.setProductView(productView);
+		}
 		return productTrackingRepository.save(productTracking);
 	}
 
