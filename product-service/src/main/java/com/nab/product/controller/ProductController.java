@@ -33,7 +33,7 @@ public class ProductController {
 	}
 	
 	@GetMapping("/get-all")
-	public ResponseEntity<List<ProductDTO>> getAllInfo(Pageable pageable){
+	public ResponseEntity<List<ProductDTO>> getAll(Pageable pageable){
         LOGGER.debug("REST request to get all products ");
 		Page<ProductDTO> products = productService.getAllProduct(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), products);

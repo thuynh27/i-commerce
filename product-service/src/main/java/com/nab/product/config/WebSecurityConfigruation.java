@@ -36,18 +36,18 @@ public class WebSecurityConfigruation extends WebSecurityConfigurerAdapter {
 		http
 			.cors()
 			.and()
-			.csrf()
-			.disable()
-			.exceptionHandling()
-			.authenticationEntryPoint(jwtAuthenticationEntryPoint)
+				.csrf()
+				.disable()
+				.exceptionHandling()
+				.authenticationEntryPoint(jwtAuthenticationEntryPoint)
 			.and()
-			.sessionManagement()
-			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 			.and()
-			.authorizeRequests()
-			.antMatchers("/product/**").permitAll()
-			.antMatchers("/admin/**").hasAuthority(Role.ROLE_ADMIN.name())
-			.anyRequest().authenticated() ;
+				.authorizeRequests()
+				.antMatchers("/product/**").permitAll()
+				.antMatchers("/admin/**").hasAuthority(Role.ROLE_ADMIN.name())
+				.anyRequest().authenticated() ;
 		
 		//JWT filter based on Authentication Filter 
 		http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

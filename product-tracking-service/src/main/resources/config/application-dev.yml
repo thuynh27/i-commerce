@@ -13,20 +13,20 @@ logging:
   level:
     ROOT: INFO
     org.hibernate.SQL: DEBUG
-    com.nab.product: DEBUG
+    com.nab.productservice: DEBUG
 server:
-  port: 8082
+  port: 8083
 spring:
   devtools:
     restart:
       enabled: true
     livereload:
       enabled: true
-  datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://localhost:3306/ProductService?createDatabaseIfNotExist=true
-    username: root
-    password: root
+  data:
+    mongodb:
+      #uri: mongodb://admin:admin@localhost:27017
+      uri: mongodb://localhost:27017
+      database: ProductTrackingService
 # ===================================================================
 # RabbitMQ properties.
 # ===================================================================
@@ -48,12 +48,5 @@ exchange:
 # Note : 
 # Token Expired Time in mins
 # ===================================================================
-authorization:
-  token:
-    header: 
-      name: Authorization
-      prefix: Bearer 
-    secret: tokenSecretKeyValueSignatureAlgorithmHS512NeedMoreThanHS256AuthorizationBearerTOKEN
-    expiredtime: 3000
 gateway:
-  ip: 192.168.1.107
+  ip: 192.168.43.7

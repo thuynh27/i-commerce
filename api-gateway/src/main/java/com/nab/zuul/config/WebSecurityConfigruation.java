@@ -54,6 +54,7 @@ public class WebSecurityConfigruation extends WebSecurityConfigurerAdapter {
 				.antMatchers("/users-ws/h2-console/**", "/users-ws/users", "/users-ws/users/login",
 						"/users-ws/actuator/*", "/users-ws/users/register", "/users-ws/users/authentication/**")
 				.permitAll()
+				.antMatchers("/products-ws/product/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
 					.oauth2Login()// enable OAuth2

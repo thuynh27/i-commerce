@@ -29,18 +29,29 @@ spring:
     username: root
     password: root
 # ===================================================================
+# RabbitMQ properties.
+# ===================================================================
+  rabbitmq:
+    listener:
+      simple:
+        concurrency: 4
+        max-concurrency: 8
+    host: localhost
+    port: 15672
+    username: guest
+    password: guest
+queue:
+  tracking:
+    name: productQueue
+  dead:
+    name: deadQueue
+exchange:
+  product-exchange:
+    name: product.topic
+# ===================================================================
 # Application properties.
 # Note : 
 # Token Expired Time in mins
 # ===================================================================
 gateway:
   ip: 192.168.43.7
-# ===================================================================
-# RabbitMQ properties.
-# ===================================================================
-spring:
-  rabbitmq:
-    host: localhost
-    port: 15672
-    username: guest
-    password: guest
