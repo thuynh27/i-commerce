@@ -32,11 +32,11 @@ public class ErrorMessage extends AbstractEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "message_error", unique = true)
+	@Column(name = "message_error")
 	@NotNull
 	private String message;
 
-	@Column(name = "function_tracking", unique = true)
+	@Column(name = "function_tracking")
 	@NotNull
 	private String functionTracking;
 
