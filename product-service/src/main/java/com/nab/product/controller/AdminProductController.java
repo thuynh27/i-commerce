@@ -3,6 +3,7 @@ package com.nab.product.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +28,7 @@ public class AdminProductController {
 		 return ResponseEntity.ok(productService.addProduct(productDTO));
 	}
 
-	@PostMapping("/edit-product")
+	@PutMapping("/edit-product")
 	public ResponseEntity<ProductDTO> editProduct(@RequestBody ProductDTO productDTO) {
 		 return ResponseEntity.ok(productService.updateProductPrice(productDTO));
 	}
