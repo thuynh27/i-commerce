@@ -1,0 +1,36 @@
+# ===================================================================
+# Spring Boot configuration for the "dev" profile.
+#
+# This configuration overrides the application.yml file.
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+logging:
+  level:
+    ROOT: INFO
+    org.hibernate.SQL: INFO
+    com.nab.productservice: DEBUG
+server:
+  port: 8085
+spring:
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/OrderMicroservice?createDatabaseIfNotExist=true
+    username: root
+    password: root
+# ===================================================================
+# Application properties.
+# Note : 
+# Token Expired Time in mins
+# ===================================================================
+gateway:
+  ip: 192.168.1.107

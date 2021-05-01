@@ -1,8 +1,8 @@
-package com.nab.product;
+package com.nab.order;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class UserServiceApplicationTests {
+class OrderServiceApplicationTests {
 
 }
