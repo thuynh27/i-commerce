@@ -13,9 +13,9 @@ logging:
   level:
     ROOT: INFO
     org.hibernate.SQL: DEBUG
-    com.nab.productservice: DEBUG
+    com.nab.cart: DEBUG
 server:
-  port: 8083
+  port: 8084
 spring:
   devtools:
     restart:
@@ -26,23 +26,7 @@ spring:
     mongodb:
       #uri: mongodb://admin:admin@localhost:27017
       uri: mongodb://localhost:27017
-      database: ProductTrackingService
-# ===================================================================
-# RabbitMQ properties.
-# ===================================================================
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
-queue:
-  tracking:
-    name: productQueue
-  dead:
-    name: deadQueue
-exchange:
-  product-exchange:
-    name: product.topic
+      database: CartService
 # ===================================================================
 # Application properties.
 # Note : 

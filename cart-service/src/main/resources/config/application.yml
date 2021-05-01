@@ -1,0 +1,26 @@
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://test:test@localhost:8010/eureka
+spring:
+  application:
+    name: cart-ws
+  profiles:
+    active: dev
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: deferred
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+server:
+  servlet:
+    session:
+      cookie:
+        http-only: true

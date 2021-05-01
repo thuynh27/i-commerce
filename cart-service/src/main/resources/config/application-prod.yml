@@ -1,5 +1,5 @@
 # ===================================================================
-# Spring Boot configuration for the "dev" profile.
+# Spring Boot configuration for the "prod" profile.
 #
 # This configuration overrides the application.yml file.
 # ===================================================================
@@ -9,44 +9,29 @@
 # Full reference is available at:
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
+
 logging:
   level:
     ROOT: INFO
-    org.hibernate.SQL: DEBUG
-    com.nab.productservice: DEBUG
+    org.hibernate.SQL: INFO
+    com.nab.userservice: INFO
 server:
-  port: 8083
+  port: 8084
 spring:
   devtools:
     restart:
-      enabled: true
+      enabled: false
     livereload:
-      enabled: true
+      enabled: false
   data:
     mongodb:
       #uri: mongodb://admin:admin@localhost:27017
       uri: mongodb://localhost:27017
-      database: ProductTrackingService
-# ===================================================================
-# RabbitMQ properties.
-# ===================================================================
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
-queue:
-  tracking:
-    name: productQueue
-  dead:
-    name: deadQueue
-exchange:
-  product-exchange:
-    name: product.topic
+      database: CartService
 # ===================================================================
 # Application properties.
 # Note : 
 # Token Expired Time in mins
 # ===================================================================
 gateway:
-  ip: 192.168.1.107
+  ip: 192.168.43.7
