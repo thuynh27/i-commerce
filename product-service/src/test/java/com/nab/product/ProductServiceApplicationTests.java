@@ -1,8 +1,8 @@
-package com.nab.service.UserService;
+package com.nab.product;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class UserServiceApplicationTests {
+class ProductServiceApplicationTests {
 
 }

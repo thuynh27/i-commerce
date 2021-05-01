@@ -1,8 +1,8 @@
-package com.nab.service.UserService;
+package com.nab.tracking;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class UserServiceApplicationTests {
+class ProductTrackingServiceApplicationTests {
 
 }
