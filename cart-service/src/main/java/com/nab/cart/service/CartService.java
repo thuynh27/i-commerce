@@ -16,5 +16,7 @@ public interface CartService {
 	
 	public CartDTO updateToCart(CartDTO cartDTO);
 	
+	public CartDTO updateOrderToCart(CartDTO cartDTO);
+	
 	public Page<CartDTO> getAllCart(String userEmail , Pageable pageable);
 }

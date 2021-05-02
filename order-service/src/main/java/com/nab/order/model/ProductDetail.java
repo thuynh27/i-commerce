@@ -41,7 +41,7 @@ public class ProductDetail extends AbstractEntity implements Serializable {
 	@NotNull
 	@Column(name = "product_id")
 	@JsonProperty("product_id")
-	private String productId;
+	private Long productId;
 	
 	@Column(name = "product_name")
 	@JsonProperty("product_name")
@@ -64,9 +64,8 @@ public class ProductDetail extends AbstractEntity implements Serializable {
     @JoinColumn(name="order_id", nullable=false)
 	private Order order;
 
-	public ProductDetail(Long id, @NotNull String productId, String productName, @NotNull BigDecimal price,
+	public ProductDetail(Long id, @NotNull Long productId, String productName, @NotNull BigDecimal price,
 			@NotNull int availability, String brand, String color, String description) {
-		super();
 		this.id = id;
 		this.productId = productId;
 		this.productName = productName;
