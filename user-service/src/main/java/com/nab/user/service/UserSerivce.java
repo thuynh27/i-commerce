@@ -12,9 +12,7 @@ public interface UserSerivce {
 	UserDTO registerUser(final UserDTO userDTO);
 
 	String authentication(final UserDTO userDTO) throws FailedLoginException;
-	
-	String getStatusFromManagementService();
-	
+
 	String authenticationOauth2User(final UserDTO userDTO);
-	
+
 }

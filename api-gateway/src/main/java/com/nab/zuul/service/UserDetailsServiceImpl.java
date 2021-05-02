@@ -10,19 +10,22 @@ import org.springframework.stereotype.Service;
 import com.nab.zuul.model.UserAuthority;
 import com.nab.zuul.repository.UserRepository;
 
-
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-	
-	@Autowired
+
 	private UserRepository userRepository;
+
+	@Autowired
+	public UserDetailsServiceImpl(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 
 	@Override
 	public UserDetails loadUserByUsername(String email) {
 		UserAuthority user = userRepository.findByEmail(email).orElse(null);
 		if (user != null) {
-			return new User(user.getName(), user.getPassword(), Boolean.TRUE, Boolean.TRUE, Boolean.TRUE,
-					Boolean.TRUE, AuthorityUtils.NO_AUTHORITIES);
+			return new User(user.getName(), user.getPassword(), Boolean.TRUE, Boolean.TRUE, Boolean.TRUE, Boolean.TRUE,
+					AuthorityUtils.NO_AUTHORITIES);
 		}
 		return null;
 	}

@@ -35,8 +35,13 @@ public class UsersController {
 	@Autowired
 	private Environment env;
 
-	@Autowired
 	private UserSerivce userSerivce;
+
+	@Autowired
+	public UsersController(Environment env, UserSerivce userSerivce) {
+		this.env = env;
+		this.userSerivce = userSerivce;
+	}
 
 	@GetMapping("/checking")
 	public String getStatus() {

@@ -1,8 +1,5 @@
 package com.nab.cart.service.impl;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +11,6 @@ import com.nab.cart.converter.CartConverter;
 import com.nab.cart.dto.CartDTO;
 import com.nab.cart.exception.BadRequestException;
 import com.nab.cart.model.Cart;
-import com.nab.cart.model.Product;
 import com.nab.cart.repository.CartRepository;
 import com.nab.cart.service.CartService;
 

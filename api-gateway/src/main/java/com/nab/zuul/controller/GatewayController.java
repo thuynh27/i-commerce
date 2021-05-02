@@ -11,17 +11,20 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nab.zuul.dto.UserDTO;
 import com.nab.zuul.service.feign.UserServiceClient;
 
-
 @RestController
 @RequestMapping("/gateway")
 public class GatewayController {
 
-	@Autowired
 	private UserServiceClient userServiceClient;
-	
+
+	@Autowired
+	public GatewayController(UserServiceClient userServiceClient) {
+		this.userServiceClient = userServiceClient;
+	}
+
 	@GetMapping("/oauth2LoginSuccess")
 	public String getOauth2LoginInfo(@AuthenticationPrincipal OAuth2AuthenticationToken authenticationToken) {
-		//		1.Fetching User Info
+		// 1.Fetching User Info
 		OAuth2User user = authenticationToken.getPrincipal();
 		UserDTO userDTO = new UserDTO(user.getName(), (String) user.getAttributes().get("email"));
 		return userServiceClient.getUserDetails(userDTO);
