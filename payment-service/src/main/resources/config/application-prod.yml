@@ -1,5 +1,5 @@
 # ===================================================================
-# Spring Boot configuration for the "dev" profile.
+# Spring Boot configuration for the "prod" profile.
 #
 # This configuration overrides the application.yml file.
 # ===================================================================
@@ -9,22 +9,23 @@
 # Full reference is available at:
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
+
 logging:
   level:
     ROOT: INFO
     org.hibernate.SQL: INFO
-    com.nab.productservice: DEBUG
+    com.nab.payment: INFO
 server:
-  port: 8085
+  port: 8086
 spring:
   devtools:
     restart:
-      enabled: true
+      enabled: false
     livereload:
-      enabled: true
+      enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://localhost:3306/OrderMicroservice?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/PaymentMicroservice?createDatabaseIfNotExist=true
     username: root
     password: root
 # ===================================================================
@@ -49,4 +50,4 @@ exchange:
 # Token Expired Time in mins
 # ===================================================================
 gateway:
-  ip: 192.168.1.107
+  ip: 192.168.43.7

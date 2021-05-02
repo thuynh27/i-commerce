@@ -1,17 +1,12 @@
-package com.nab.order.model;
+package com.nab.payment.model;
 
 import java.math.BigDecimal;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -28,12 +23,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-@Table(name = "order_product")
+@Table(name = "payment")
 @Builder
-public class Order extends AbstractEntity{
-	
+public class Payment extends AbstractEntity{
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@Column(name = "id", unique = true)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,12 +42,9 @@ public class Order extends AbstractEntity{
 	private String userEmail;
 
 	@NotNull
-	@Column(name = "cart_id")	
-	@JsonProperty("cart_id")
-	private String cartId;
-	
-    @OneToMany(mappedBy = "order", cascade = {CascadeType.ALL}, orphanRemoval = true)
-	private List<ProductDetail> productItems;
+	@Column(name = "order_id")	
+	@JsonProperty("order_id")
+	private Long orderId;
 	
 	@Column(name = "total_price")
 	@JsonProperty("total_price")
@@ -58,14 +52,7 @@ public class Order extends AbstractEntity{
 	
 	@NotNull
 	@Column(name = "oder_status")
+	@JsonProperty("oder_status")
 	private String  orderStatus;
 
-	public Order(Long id, @NotNull String userEmail, @NotNull String cartId, List<ProductDetail> productItems,
-			BigDecimal totalPrice) {
-		this.id = id;
-		this.userEmail = userEmail;
-		this.cartId = cartId;
-		this.productItems = productItems;
-		this.totalPrice = totalPrice;
-	}
 }
