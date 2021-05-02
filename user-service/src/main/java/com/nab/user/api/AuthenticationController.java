@@ -17,14 +17,10 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 @RequestMapping("/authentication")
 public class AuthenticationController {
-
-	private UserSerivce userService;
-
+	
 	@Autowired
-	public AuthenticationController(UserSerivce userService) {
-		this.userService = userService;
-	}
-
+	private UserSerivce userService;
+	
 	@ApiOperation(value = "Generate Token for Facebook User", nickname = "getUserDetails", notes = "Get Authentication Info for authenticaiton checking", response = String.class, authorizations = {})
 	@ApiResponses(value = @ApiResponse(code = 200, message = "OK", response = String.class))
 	@PostMapping

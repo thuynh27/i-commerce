@@ -34,26 +34,21 @@ import com.nab.user.service.UserSerivce;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService, UserSerivce {
 
+	@Autowired
 	UserRepository userRepository;
 
+	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
 
+	@Autowired
 	private AuthenticationManager authenticationManager;
 
 	public static final String USER_DISABLED = "USER_DISABLED";
 
 	public static final String INVALID_CREDENTIALS = "INVALID_CREDENTIALS";
-
-	@Autowired
-	public UserDetailsServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder,
-			JwtTokenUtil jwtTokenUtil, AuthenticationManager authenticationManager) {
-		this.userRepository = userRepository;
-		this.passwordEncoder = passwordEncoder;
-		this.jwtTokenUtil = jwtTokenUtil;
-		this.authenticationManager = authenticationManager;
-	}
 
 	@Override
 	public UserDetails loadUserByUsername(String email) {
