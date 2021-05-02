@@ -47,4 +47,9 @@ public class CartController {
 	public ResponseEntity<CartDTO> updateCart(@RequestBody CartDTO cartDTO) {
 		return ResponseEntity.ok(cartService.updateToCart(cartDTO));
 	}
+	
+	@PutMapping("/update-order")
+	public ResponseEntity<CartDTO> updateOrderCart(@RequestBody CartDTO cartDTO) {
+		return ResponseEntity.ok(cartService.updateOrderToCart(cartDTO));
+	}
 }

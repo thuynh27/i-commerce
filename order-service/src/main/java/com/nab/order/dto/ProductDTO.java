@@ -20,7 +20,7 @@ public class ProductDTO {
 
 	@NotNull
 	@JsonProperty("product_id")
-	private String productId;
+	private Long productId;
 
 	@JsonProperty("product_name")
 	private String productName;
@@ -36,4 +36,16 @@ public class ProductDTO {
 	private String color;
 
 	private String description;
+
+	public ProductDTO(@NotNull Long productId, String productName, @NotNull BigDecimal price,
+			@NotNull int availability, String brand, String color, String description) {
+		this.productId = productId;
+		this.productName = productName;
+		this.price = price;
+		this.availability = availability;
+		this.brand = brand;
+		this.color = color;
+		this.description = description;
+	}
+	
 }

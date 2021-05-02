@@ -7,21 +7,27 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nab.order.converter.CartProductConverter;
 import com.nab.order.converter.OrderConverter;
+import com.nab.order.dto.CartDTO;
 import com.nab.order.dto.OrderDTO;
 import com.nab.order.model.Order;
 import com.nab.order.model.ProductDetail;
 import com.nab.order.repository.OrderRepository;
 import com.nab.order.service.OrderService;
+import com.nab.order.service.feign.CartServiceClient;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
 	private OrderRepository orderRepository;
+	
+	private CartServiceClient cartServiceClient;
 
 	@Autowired
-	public OrderServiceImpl(OrderRepository orderRepository) {
+	public OrderServiceImpl(OrderRepository orderRepository , CartServiceClient cartServiceClient) {
 		this.orderRepository = orderRepository;
+		this.cartServiceClient = cartServiceClient;
 	}
 
 	@Override
@@ -29,7 +35,16 @@ public class OrderServiceImpl implements OrderService {
 	public OrderDTO addOrder(OrderDTO orderDTO) {
 		Order order = OrderConverter.getInstance().convertFromDto(orderDTO);
 		mapProductDetails(order);
+		updateCartData(orderDTO);
 		return  OrderConverter.getInstance().convertFromEntity(orderRepository.save(order));
+	}
+
+	private void updateCartData(OrderDTO orderDTO) {
+		CartDTO cart = new CartDTO();
+		cart.setId(orderDTO.getCartId());
+		cart.setUserEmail(orderDTO.getUserEmail());
+		cart.setProductItems(CartProductConverter.getInstance().createFromDtos(orderDTO.getProductItems()));
+		cartServiceClient.updateCartDetails(cart);
 	}
 
 	private void mapProductDetails(Order order) {

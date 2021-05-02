@@ -50,4 +50,24 @@ public class CartServiceImpl implements CartService {
 				.map(CartConverter.getInstance()::convertFromEntity);
 	}
 
+	/**
+	 * Remove all exist product items when customer proceed to order process .
+	 * 
+	 */
+	@Override
+	public CartDTO updateOrderToCart(CartDTO cartDTO) {
+		Optional<Cart> oldCart = cartRepository.findById(cartDTO.getId());
+		if(oldCart.isPresent()) {
+			Cart cart = oldCart.get();
+			if(cart.getUserEmail().equals(cartDTO.getUserEmail())) {
+				removeProductItems(cartDTO , cart);
+				return CartConverter.getInstance().convertFromEntity(cartRepository.save(cart));
+			}
+		}
+		throw new BadRequestException("Cart Not Exsit!");
+	}
+
+	private void removeProductItems(CartDTO cartDTO, Cart cart) {
+		 cart.getProductItems().removeAll(cartDTO.getProductItems());
+	}
 }

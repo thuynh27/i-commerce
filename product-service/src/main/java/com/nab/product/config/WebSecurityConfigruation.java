@@ -29,8 +29,6 @@ public class WebSecurityConfigruation extends WebSecurityConfigurerAdapter {
 		this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
 	}
 
-
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
