@@ -44,7 +44,7 @@ In order to get to the market quickly, they just want to build an MVP version wi
 #### 2.1 HIGH LEVEL DESIGN
 iCommerce Architecture :
 
-![High Level Design](data/images/architecture.PNG)
+![High Level Design](data/images/architecture.png)
 
 #### 2.2 Database Design
 User Database Diagram
