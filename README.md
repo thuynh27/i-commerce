@@ -56,11 +56,14 @@ Product Database Diagram
 ![Product Database](data/images/product.PNG)
 - Product Table : Product Data
 - Product Price History : Product Price History Data . Update after Product Price change.
-- Error : Tracking Error If Message Error Occurs.
+- Error : Tracking Error If message occurs meanwhile Tracking Product process.
 
 Product Tracking Diagram
 
 ![Product Tracking Database](data/images/product_tracking.PNG)
+
+- Product Tracking : Tracking product view or get functions
+- Product View : Tracking for product activity like filter search sort .
 
 Cart Diagram
 
@@ -69,6 +72,9 @@ Cart Diagram
 Order Database Diagram
 
 ![Order Database](data/images/order.PNG)
+
+Order : General Information
+Order Details : Product Information in details.
 
 Payment Database Diagram
 
@@ -90,8 +96,9 @@ For each services, the project have 4 layers
   - Service
   - Repository
   - Entity-Document
+  
 #### 2.4 Libaries
-- spring-boot-starter-web : Web API
+- spring-boot-starter-web : Web API 
 - spring-boot-starter-actuator : Monitoring and Health managements
 - spring-boot-starter-data-jpa : Spring Data JPA 
 - spring-boot-starter-data-mongodb : Spring starter for using mongoDB with Spring Data MongoDB
@@ -155,7 +162,7 @@ For each services, the project have 4 layers
  - JDK 11
  - Spring boot 2.4.5
  - Spring v5.3.6
- - Spring Boot v2.3.10.RELEASE - Using for Zuul API Gateway . Because Spring 2.4 still not suppot for Zuul only support Spring cloud api gateway.
+ - Spring Boot v2.3.10.RELEASE - Using for Zuul API Gateway . Because Spring 2.4 still not support for Zuul. Will be facing some issue with Ribbon timeout.
  - MySQL
  - MongoDB
  - RabbitMQ
@@ -163,7 +170,7 @@ For each services, the project have 4 layers
 
 ### 3. How to run 
  - Change Config for gateway.ip = your local ip .
-     Only for API Gateway IP can access to our services . For security reason , you can remove it in WebSecurityConfigruation
+    -  Only for API Gateway IP can access to our services for security reason , you can remove it in WebSecurityConfigruation
  - If you want run into your facebook provider change config into application.yml in Zuul gateway.
  ##### Build
  
@@ -197,6 +204,3 @@ For each services, the project have 4 layers
  
  ### 4. References
  [Microservice Architecture](https://microservices.io/)
- 
- 
-
